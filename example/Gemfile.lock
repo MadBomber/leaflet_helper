@@ -1,20 +1,28 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    haml (4.0.7)
+    haml (5.1.2)
+      temple (>= 0.8.0)
       tilt
     leaflet_helper (0.7.7.0)
-    puma (3.4.0)
-    rack (1.6.4)
-    rack-protection (1.5.3)
+    mustermann (1.1.1)
+      ruby2_keywords (~> 0.0.1)
+    nio4r (2.5.2)
+    puma (4.3.3)
+      nio4r (~> 2.0)
+    rack (2.2.2)
+    rack-protection (2.0.8.1)
       rack
-    sinatra (1.4.7)
-      rack (~> 1.5)
-      rack-protection (~> 1.4)
-      tilt (>= 1.3, < 3)
-    sinatra-partial (1.0.0)
-      sinatra (~> 1.4)
-    tilt (2.0.5)
+    ruby2_keywords (0.0.2)
+    sinatra (2.0.8.1)
+      mustermann (~> 1.0)
+      rack (~> 2.0)
+      rack-protection (= 2.0.8.1)
+      tilt (~> 2.0)
+    sinatra-partial (1.0.1)
+      sinatra (>= 1.4)
+    temple (0.8.2)
+    tilt (2.0.10)
 
 PLATFORMS
   ruby
@@ -27,7 +35,7 @@ DEPENDENCIES
   sinatra-partial
 
 RUBY VERSION
-   ruby 2.3.1p112
+   ruby 2.7.1p83
 
 BUNDLED WITH
-   1.12.5
+   2.1.4
