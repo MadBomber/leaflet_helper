@@ -1,0 +1,7 @@
+# start
+
+export APP_BIND='0.0.0.0'
+export APP_PORT=4567
+
+rackup --port $APP_PORT --host $APP_BIND --server puma
+

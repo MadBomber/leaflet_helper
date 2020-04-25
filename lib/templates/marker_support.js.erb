@@ -1,0 +1,96 @@
+<!-- begin <%= @file_name %> -->
+
+// set up AJAX request
+ajaxRequestFor<%= @id %> = getXmlHttpObjectFor<%= @id %>();
+
+if (ajaxRequestFor<%= @id %> == null) {
+  alert ("This browser too old - can not show markers");
+  // return;
+}
+
+function getXmlHttpObjectFor<%= @id %>() {
+  if (window.XMLHttpRequest) { return new XMLHttpRequest(); }
+  if (window.ActiveXObject)  { return new ActiveXObject("Microsoft.XMLHTTP"); }
+  return null;
+}
+
+
+getMarkersFor<%= @id %>();
+<%= @map_name %>.on('moveend', on<%= @id %>Move);
+
+function on<%= @id %>Move(e) { getMarkersFor<%= @id %>(); }
+
+
+// request the marker info for the current bounds
+function getMarkersFor<%= @id %>() {
+
+  // TODO: Currently the displayed map bounds is not being used
+  //       to get the new set of markers.  This could be ugly for
+  //       lots of markers.  Need a way to insert the bounds into the route.
+
+  var bounds  = <%= @map_name %>.getBounds();
+  var minll   = bounds.getSouthWest();
+  var maxll   = bounds.getNorthEast();
+
+  // this is the place from which the markers JSON array is obtained
+  var route = '<%= @route %>';
+
+  ajaxRequestFor<%= @id %>.onreadystatechange = stateChangedFor<%= @id %>;
+  ajaxRequestFor<%= @id %>.open('GET', route, true);
+  ajaxRequestFor<%= @id %>.send(null);
+}
+
+
+// The map changed so get new markers
+function stateChangedFor<%= @id %>() {
+
+  // if AJAX returned a list of markers, add them to the map
+  if (ajaxRequestFor<%= @id %>.readyState == 4) {
+
+  <% if @cluster %>
+    var markersFor<%= @id %> = L.markerClusterGroup(
+      <%= @cluster_marker %>
+    );
+  <% end %>
+
+    // use the info here that was returned
+    if (ajaxRequestFor<%= @id %>.status == 200) {
+      plotlist = eval("(" + ajaxRequestFor<%= @id %>.responseText + ")");
+      removeMarkersFrom<%= @id %>();
+
+      for (i=0; i<plotlist.length; i++) {
+        var plotll    = new L.LatLng(plotlist[i].lat, plotlist[i].lon, true);
+        var plotmark  = new L.Marker(plotll);
+        plotmark.data = plotlist[i];
+
+        plotmark.bindPopup(plotlist[i].html);
+
+      <% if @cluster %>
+        markersFor<%= @id %>.addLayer(plotmark);
+      <% else %>
+        <%= @map_name %>.addLayer(plotmark);
+        plotlayersFor<%= @id %>.push(plotmark);
+       <% end %>
+
+      } // for
+
+    <% if @cluster %>
+      <%= @map_name %>.addLayer(markersFor<%= @id %>);
+    <% end %>
+
+    } // if (ajaxRequestFor<%= @id %>.status == 200)
+
+  } // if (ajaxRequestFor<%= @id %>.readyState == 4)
+
+} // function stateChangedFor<%= @id %>()
+
+
+// remove all of the markers from the map
+function removeMarkersFrom<%= @id %>() {
+  for (i=0; i<plotlayersFor<%= @id %>.length; i++) {
+    <%= @map_name %>.removeLayer(plotlayersFor<%= @id %>[i]);
+  }
+  plotlayersFor<%= @id %> = [];
+}
+
+<!-- end <%= @file_name %> -->

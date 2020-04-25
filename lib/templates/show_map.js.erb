@@ -1,0 +1,17 @@
+<!-- begin <%= @file_name %> -->
+
+  var <%= @map_name %> = new L.Map('<%= @id %>',
+      {
+        zoom:     <%= @zoom %>,
+        minZoom:  <%= @min_zoom %>,
+        maxZoom:  <%= @max_zoom %>
+      }
+    );
+
+<% if @markers %>
+  var ajaxRequestFor<%= @id %>; 
+  var plotlistFor<%= @id %>;
+  var plotlayersFor<%= @id %> = [];
+<% end %>
+
+<!-- end <%= @file_name %> -->

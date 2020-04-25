@@ -1,0 +1,23 @@
+-# layout.haml
+!!!
+%html
+  %head
+    %title Application by VanHoozer
+    = LeafletHelper::L.init({ plugins: [ :marker_cluster ] })
+
+
+  %body
+
+    #logo_header
+
+      %h1 
+        Application by VanHoozer
+
+    #main
+
+      = yield
+
+    #footer
+      = partial :footer
+
+    = LeafletHelper::L.show_map('my_wonderful_map', { openstreetmap: true, mapbox: false, route: "my_wonderful_map/markers", markers: true, cluster: true })

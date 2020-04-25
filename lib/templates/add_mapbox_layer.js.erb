@@ -1,0 +1,14 @@
+<!-- begin <%= @file_name %> -->
+  
+  L.tileLayer(
+    '<%= @mapbox_url %>', 
+    {
+      mbUser:       '<%= @mapbox_user %>',
+      attribution:  '<%= @mapbox_attribution %>',
+      minZoom:      <%= @min_zoom %>,
+      maxZoom:      <%= @max_zoom %>,
+      id:           '<%= @mapbox_style_id %>',
+      accessToken:  '<%= @mapbox_access_token %>'
+    }).addTo(<%= @map_name %>);
+  
+<!-- end <%= @file_name %> -->

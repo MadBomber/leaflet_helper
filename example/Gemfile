@@ -1,0 +1,14 @@
+# Gemfile
+
+source "https://rubygems.org"
+
+ruby "2.7.1"
+
+# Special Libraries
+gem 'leaflet_helper'  # A Ruby-wrapper around leaflet.js
+
+# Web-app framework
+gem 'sinatra', require: 'sinatra/base'  # Classy web-development dressed in a DSL
+gem 'sinatra-partial'                   # A sinatra extension for render partials.
+gem 'haml'                              # An elegant, structured (X)HTML/XML templating engine.
+gem 'puma'                              # Puma is a simple, fast, threaded, and highly concurrent HTTP 1.1 server for Ruby/Rack application

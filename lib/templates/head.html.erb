@@ -1,0 +1,13 @@
+<!-- begin <%= @file_name %> -->
+
+<!-- Leaflet -->
+<script src="<%= LeafletHelper::L::JS %>"></script>
+<link rel="stylesheet" href="<%= LeafletHelper::L::CSS %>">
+
+<% if @plugins.include? :marker_cluster %>
+  <!-- Leaflet.markercluster -->
+  <script src="<%= LeafletHelper::L::MarkerClusterJS %>"></script>
+  <link rel="stylesheet" href="<%= LeafletHelper::L::MarkerClusterCSS %>">
+<% end %>
+
+<!-- end <%= @file_name %> -->

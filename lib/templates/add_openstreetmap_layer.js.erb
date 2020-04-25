@@ -1,0 +1,11 @@
+<!-- begin <%= @file_name %> -->
+  
+  L.tileLayer(
+    '<%= @osm_url %>', 
+    {
+      minZoom:      <%= @min_zoom %>, 
+      maxZoom:      <%= @max_zoom %>, 
+      attribution:  '<%= @osm_attribution %>'
+    }).addTo(<%= @map_name %>);
+
+<!-- end <%= @file_name %> -->
