@@ -1,3 +1,12 @@
+# DO NOT USE
+
+I wrote this thing a while back as an experiment.  At the time it worked well enought for what I had intended.  I lost it off of Github.  Don't know why.  I might have deleted it.  Recently I discovered that rubygems.org still had it on file.  So I downloaded it, put it back on Github and spent a few hours trying to update it to use the latest versions of LeafletJS and the plugin leaflet.cluster_marker.  I failed.
+
+This really is a POS-kinda thing.  Its not worth your time reviewing.
+
+Maybe one of these days I will feel like readdressing the idea of easily interacting with the LeafletJS library and its plugins via pure Ruby.  That's not today.
+
+
 # LeafletHelper
 
 For those of us who don't want to get our hands dirty writing JavaScript (shutter) this library is for you.  Actually, its for me, but you can use it if you like.  It is a Ruby-wrapper around some basic leaflet.js functions.  It uses either Open Street Map or your account on mapbox.com.  It handles markers on maps and the clustering of those markers.  It supports multiple maps per web page.

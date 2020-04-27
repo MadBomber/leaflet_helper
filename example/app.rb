@@ -2,18 +2,18 @@
 #########################################################
 ###
 ##  File: app.rb
-##  Desc: An example Sinatra app using LeafletHelper 
+##  Desc: An example Sinatra app using LeafletHelper
 #
 
 require 'leaflet_helper'
 
 $markers = LeafletHelper::ManageMarkers.new
 
-module TestData
+AREA51_LOCATION   = [37.242, -115.8191]         # Lat, Long
+DELTA             = [15, 15]  # NOTE: expresed as integer of real delta +/- 1.5 in lat, long
+                              #       in order to use rand() method
 
-  AREA51_LOCATION   = [37.242, -115.8191]         # Lat, Long
-  DELTA             = [15, 15]  # NOTE: expresed as integer of real delta +/- 1.5 in lat, long
-                                #       in order to use rand() method
+module TestData
 
   CODE_WORDS    = [
     "Magic Carpet",
@@ -43,7 +43,7 @@ module TestData
       offset << dir * rand(delta.last).to_f / 10.0
       point   = fixed_point.each_with_index.map {|v, x| v + offset[x]}
 
-      return { 'lat' => point.first, 'lon' => point.last } 
+      return { 'lat' => point.first, 'lon' => point.last }
 
     end # def get_random_location( fixed_point=AREA51_LOCATION, delta=DELTA )
   end # class < self
@@ -52,6 +52,17 @@ end # module TestData
 
 # Generate a consistent set of test markers
 $markers.clear
+
+$markers.add(
+  id:   'Area 51',
+  lat:  AREA51_LOCATION.first,
+  lon:  AREA51_LOCATION.last,
+  html: <<~EOS
+    <h3>Area 51</h3>
+    <p>Property for sale.  Price Reduced.  Owner is motivated to sale quickly.</p>
+  EOS
+)
+
 30.times do |x|
   code_word = TestData.get_random_codeword
   location  = TestData.get_random_location
@@ -103,7 +114,7 @@ module APP
     set :views,           settings.root + '/views'
 
     set :partial_template_engine, :haml
-  
+
     configure do
       mime_type :html, 'text/html'
     end

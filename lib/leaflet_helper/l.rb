@@ -4,12 +4,16 @@
 
 module LeafletHelper
   class L
-    VERSION   = '0.7.7'       # of leaflet.js
-    JS        = "http://cdn.leafletjs.com/leaflet/v#{VERSION}/leaflet.js"
-    CSS       = "http://cdn.leafletjs.com/leaflet/v#{VERSION}/leaflet.css"
+    JS        = "http://cdn.leafletjs.com/leaflet/v#{LeafletHelper::VERSION::LeafletJS}/leaflet.js"
+    CSS       = "http://cdn.leafletjs.com/leaflet/v#{LeafletHelper::VERSION::LeafletJS}/leaflet.css"
 
-    MarkerClusterJS   = "https://raw.githubusercontent.com/Leaflet/Leaflet.markercluster/leaflet-0.7/dist/leaflet.markercluster.js"
-    MarkerClusterCSS  = "https://raw.githubusercontent.com/Leaflet/Leaflet.markercluster/leaflet-0.7/dist/MarkerCluster.css"
+    if LeafletHelper::VERSION::MarkerClusterJS.start_with?('0')
+      MarkerClusterJS   = "https://raw.githubusercontent.com/Leaflet/Leaflet.markercluster/leaflet-0.7/dist/leaflet.markercluster.js"
+      MarkerClusterCSS  = "https://raw.githubusercontent.com/Leaflet/Leaflet.markercluster/leaflet-0.7/dist/MarkerCluster.css"
+    else
+      MarkerClusterJS   = "https://unpkg.com/leaflet.markercluster@#{LeafletHelper::VERSION::MarkerClusterJS}/dist/leaflet.markercluster.js"
+      MarkerClusterCSS  = "https://unpkg.com/leaflet.markercluster@#{LeafletHelper::VERSION::MarkerClusterJS}/dist/MarkerCluster.css"
+    end
 
     # FIXME: Needs to be isolated between maps in a multi-map application.
     #        experiments/maps shows the problem
@@ -22,6 +26,9 @@ module LeafletHelper
         zoom:           9,
         min_zoom:       2,
         max_zoom:       22
+      },
+      cluster_marker: {
+
       }
     }
 
@@ -138,18 +145,34 @@ module LeafletHelper
 
       # Allows for the generation of markers on top of the map
       def add_support_for_markers(id="map", options={})
+
+        clusterMarkerGroupDefaluts = <<~STRING
+          {
+            showCoverageOnHover:        true, // When you mouse over a cluster it shows the bounds of its markers.
+            zoomToBoundsOnClick:        true, // When you click a cluster we zoom to its bounds.
+            spiderfyOnMaxZoom:          true, // When you click a cluster at the bottom zoom level we spiderfy it so you can see all of its markers. (Note: the spiderfy occurs at the current zoom level if all items within the cluster are still clustered at the maximum zoom level or at zoom specified by disableClusteringAtZoom option)
+            removeOutsideVisibleBounds: true, // Clusters and markers too far from the viewport are removed from the map for performance.
+            spiderLegPolylineOptions:   {     // Allows you to specify PolylineOptions to style spider legs.
+              weight:   1.5,
+              color:    '#222',
+              opacity:  0.5
+            }
+          }
+        STRING
+
         @@defaults[id] = {
-                    id:         id,
-                    map_name:   get_map_name(id),
-                    route:      "#{id}/markers",
-                    markers:    true,
-                    cluster:    false
+                    id:             id,
+                    map_name:       get_map_name(id),
+                    route:          "#{id}/markers",
+                    markers:        true,
+                    cluster:        false,
+                    cluster_marker: clusterMarkerGroupDefaluts
                   }.merge(options)
 
         o = @@defaults[:leaflet_helper_base].merge( @@defaults[id] )
 
         return U.pull_in 'marker_support.js.erb', o
-      end # def add_support_for_markers(map_id, map_options) 
+      end # def add_support_for_markers(map_id, map_options)
 
 
       # The Javascript container that has the map for this id

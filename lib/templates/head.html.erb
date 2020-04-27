@@ -6,8 +6,8 @@
 
 <% if @plugins.include? :marker_cluster %>
   <!-- Leaflet.markercluster -->
-  <script src="<%= LeafletHelper::L::MarkerClusterJS %>"></script>
-  <link rel="stylesheet" href="<%= LeafletHelper::L::MarkerClusterCSS %>">
+  <script type="text/plain" src="<%= LeafletHelper::L::MarkerClusterJS %>"></script>
+  <link type="text/plain" rel="stylesheet" href="<%= LeafletHelper::L::MarkerClusterCSS %>">
 <% end %>
 
 <!-- end <%= @file_name %> -->

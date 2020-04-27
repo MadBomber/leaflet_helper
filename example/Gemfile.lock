@@ -4,7 +4,7 @@ GEM
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
-    leaflet_helper (0.7.7.0)
+    leaflet_helper (1.6.0.0)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
     nio4r (2.5.2)
@@ -29,7 +29,7 @@ PLATFORMS
 
 DEPENDENCIES
   haml
-  leaflet_helper
+  leaflet_helper (= 1.6.0.0)
   puma
   sinatra
   sinatra-partial

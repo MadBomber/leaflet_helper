@@ -1,8 +1,8 @@
 # leaflet_helper.rb
 #
-# If you are a front-end developer and a Javascript guru this will 
+# If you are a front-end developer and a Javascript guru this will
 # make you laught.  If you are a back-end big-data AI do-er of amazing
-# things then this library might be of some use to you.  It allows you 
+# things then this library might be of some use to you.  It allows you
 # to but maps onto a web-page using simple frameworks.  No more NodeJS
 # or Rails.  Use some simple sinatra-based haml pages and voila you got maps.
 #
@@ -14,6 +14,7 @@
 #   MAPBOX_STYLE_ID
 #   MAPBOX_ACCESS_TOKEN
 
+
 require 'erb'
 require 'pathname'
 
@@ -22,10 +23,11 @@ AREA51 = Struct.new('Location', :latitude, :longitude).new
 AREA51.latitude   = 37.235
 AREA51.longitude  = -115.811111
 
-require 'leaflet_helper/string_template'  # Lets do simple string templates
-require 'leaflet_helper/manage_markers'   # Lets keep track of some markers
-require 'leaflet_helper/u'                # a utility class
-require 'leaflet_helper/l'                # wrapper class for LeafletJS
+require_relative 'version.rb'
+require_relative 'leaflet_helper/string_template'  # Lets do simple string templates
+require_relative 'leaflet_helper/manage_markers'   # Lets keep track of some markers
+require_relative 'leaflet_helper/u'                # a utility class
+require_relative 'leaflet_helper/l'                # wrapper class for LeafletJS
 
 
 module LeafletHelper

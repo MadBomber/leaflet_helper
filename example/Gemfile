@@ -1,11 +1,13 @@
 # Gemfile
 
+require_relative '../lib/version.rb'
+
 source "https://rubygems.org"
 
 ruby "2.7.1"
 
 # Special Libraries
-gem 'leaflet_helper'  # A Ruby-wrapper around leaflet.js
+gem 'leaflet_helper', "= #{LeafletHelper::VERSION::GEM}"  # A Ruby-wrapper around leaflet.js
 
 # Web-app framework
 gem 'sinatra', require: 'sinatra/base'  # Classy web-development dressed in a DSL
