@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   EOS
 
   spec.homepage      = "http://github.com/MadBomber/leaflet_helper"
+  spec.required_ruby_version = ">= 4.0"
   spec.license       = "You want it?  Its yours!"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
